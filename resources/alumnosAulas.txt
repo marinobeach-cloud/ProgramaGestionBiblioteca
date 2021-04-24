@@ -1,8 +1,8 @@
 0 Lola Roca 201901063
 1 Inés Saavedra 201934567
 0 beatriz Sicilia 201803452
-2 Jorge Perez2345 
-2 hol adios12345 
+2 Jorge Perez 2345
+2 hol adios 12345
 0 s s s
 1 sergio asdf234 
 2 adg asdg as

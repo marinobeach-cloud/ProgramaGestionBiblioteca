@@ -55,6 +55,6 @@ public class MainVentana extends JFrame {
         for(int i = 0 ; i< alumnosReserva.size(); i++)
             datos[i][0] = alumnosReserva.get(i);*/
 
-        this.showStudents.setDatos(b1);
+        this.showStudents.setDatos(b1.getNumero());
     }
 }

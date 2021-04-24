@@ -32,7 +32,7 @@ public class FormPanel extends JPanel
         jLabelApellido.setLabelFor(apellido);
 
         JTextField clave = new JTextField(10);
-        clave.setText(" ");
+        clave.setText("");
         clave.setBounds(200, 85, 100, 20);
         JLabel jLabelClave = new JLabel("Clave:");
         jLabelClave.setBounds(140, 80, 60, 30);
@@ -73,7 +73,7 @@ public class FormPanel extends JPanel
                 try
                 {
                     myWriter = new FileWriter("./resources/alumnosAulas.txt",true);
-                    myWriter.write( String.valueOf(aula)+" "+ nombre.getText()+" "+apellido.getText()+clave.getText()+"\n");
+                    myWriter.write(aula +" "+ nombre.getText()+" "+apellido.getText()+" "+clave.getText()+"\n");
                     myWriter.close();
 
                     nombre.setText("");
