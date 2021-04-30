@@ -22,7 +22,7 @@ public class MainVentana extends JFrame {
     public MainVentana()
     {
 
-        this.setTitle("Proyecto Java");
+        this.setTitle("Programa Gestion Biblioteca");
         this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
         this.setMinimumSize(new Dimension(WIDTH, HEIGHT));
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -51,5 +51,21 @@ public class MainVentana extends JFrame {
    public void actualizarAlumnos(Biblioteca b1)
     {
         this.showStudents.setDatos(b1.getNumero());
+    }
+
+    public void resetShowRoomsPanel()
+    {
+        this.remove(showRooms); //me cargo todo lo que tenga mi ventanas y las volvemos a cargar actualizado
+        this.remove(showStudents);
+
+        showRooms = new ShowRoomsPanel(this);
+        showStudents = new ShowStudentsPanel(this);
+
+        this.add(showRooms);
+        this.add(showStudents);
+
+        this.revalidate();
+        this.repaint();
+
     }
 }

@@ -96,8 +96,10 @@ public class FormPanel extends JPanel
                     System.out.println("Error");
                 }
 
+                mainVentana.resetShowRoomsPanel();
 
             }
+
         });
 
         button.setBounds(100, 300, 200, 50);
