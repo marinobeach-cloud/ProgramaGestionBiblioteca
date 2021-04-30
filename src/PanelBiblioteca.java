@@ -7,34 +7,53 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class PanelBiblioteca extends JPanel {
+public class PanelBiblioteca extends JPanel
+{
 
     private final ShowRoomsPanel showRoomsPanel;
     private JButton btn;
     private JLabel lblSitiosLibres;
-    private int alumnosReservados;
+    private int alumnosReservados; //nos va a dar una lista con las personas en esa clase
 
-    public PanelBiblioteca(Biblioteca b1, ShowRoomsPanel showRoomsPanel) {
+    public PanelBiblioteca(Biblioteca b1, ShowRoomsPanel showRoomsPanel)
+    {
         this.showRoomsPanel = showRoomsPanel;
-        this.setLayout(new GridLayout(3,1));
-        this.add(new JLabel(b1.getNombre()));
-        this.btn = new JButton();
-        btn.setIcon(new ImageIcon(b1.getImagenBiblioteca()));
-        this.add(btn);
-        this.alumnosReservados = this.leerFichero(b1);
-        this.lblSitiosLibres = new JLabel("Sitios libres: " + (b1.getCapacidad() - this.alumnosReservados));
+        this.setLayout(null);
 
+        JLabel nombre = new JLabel(b1.getNombre());
+        Font fuente=new Font("Arial", Font.BOLD, 15);
+        nombre.setFont(fuente);
+        nombre.setBounds(10,3,200,20);
+
+        this.btn = new JButton();
+        ImageIcon imagen = new ImageIcon(b1.getImagenBiblioteca());
+        btn.setIcon(new ImageIcon(imagen.getImage().getScaledInstance(b1.getWidth(), b1.getHeight(), Image.SCALE_AREA_AVERAGING)));
+        btn.setBounds(10,50,b1.getWidth(),b1.getHeight());
+
+
+        this.alumnosReservados = this.leerFichero(b1); //numero alumnos que hay en esa clase
+        JLabel lblSitiosLibres = new JLabel("Sitios libres: " + (b1.getCapacidad() - this.alumnosReservados));
+        lblSitiosLibres.setBounds(10,230,100,20);
+
+
+        this.add(nombre);
+        this.add(btn);
         this.add(lblSitiosLibres);
-        this.btn.addActionListener(new ActionListener() {
+
+        this.btn.addActionListener(new ActionListener()
+        {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent e)
+            {
                 PanelBiblioteca.this.showRoomsPanel.getMainVentana().actualizarAlumnos(b1);
+
             }
         });
 
     }
 
-    public int leerFichero(Biblioteca b1) {
+    public int leerFichero(Biblioteca b1) //me va a devolver un número con la cantidad de gente (alumnosReservados)
+    {
         Scanner s = null;
         int alumnosReservados = 0;
         try
@@ -53,7 +72,7 @@ public class PanelBiblioteca extends JPanel {
 
                 if (aulaNum == b1.getNumero())
                 {
-                   alumnosReservados++;
+                   alumnosReservados++; //Si estamos en mi aula le sumamos 1
                 }
 
             }

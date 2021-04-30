@@ -19,7 +19,8 @@ public class MainVentana extends JFrame {
         new MainVentana();
     }
 
-    public MainVentana() {
+    public MainVentana()
+    {
 
         this.setTitle("Proyecto Java");
         this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
@@ -41,20 +42,14 @@ public class MainVentana extends JFrame {
 
     }
 
-    public void restarAlumnosLibres(int aula) {
+    public void restarAlumnosLibres(int aula)
+    {
         if (alumnosLibres[aula] > 0)
             alumnosLibres[aula] -= 1;
     }
-    public int[] getAlumnosLibres() {
-        return alumnosLibres;
-    }
 
-    public void actualizarAlumnos(Biblioteca b1) {
-
-        /*Object[][] datos = new Object[alumnosReserva.size()][1];
-        for(int i = 0 ; i< alumnosReserva.size(); i++)
-            datos[i][0] = alumnosReserva.get(i);*/
-
+   public void actualizarAlumnos(Biblioteca b1)
+    {
         this.showStudents.setDatos(b1.getNumero());
     }
 }

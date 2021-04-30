@@ -16,36 +16,45 @@ public class FormPanel extends JPanel
 
         setLayout(null);
 
+        Font fuente =new Font("Arial", Font.BOLD, 20);
+        JLabel jTitulo1= new JLabel("BIENVENIDOS AL SERVICIO DE BIBLIOTECAS ");
+        JLabel jTitulo2= new JLabel("DE COMILLAS");
+        jTitulo1.setFont(fuente);
+        jTitulo2.setFont(fuente);
+        jTitulo1.setBounds(10, 25, 500, 20);
+        jTitulo2.setBounds(150, 65, 500, 20);
+
+
         JTextField nombre = new JTextField(10);
         nombre.setText("");
-        nombre.setBounds(200, 25, 100, 20);
+        nombre.setBounds(200, 125, 100, 20);
         JLabel jLabelNombre = new JLabel("Nombre:");
-        jLabelNombre.setBounds(140, 20, 60, 30);
+        jLabelNombre.setBounds(140, 120, 60, 30);
         jLabelNombre.setLabelFor(nombre);
 
 
         JTextField apellido = new JTextField(10);
         apellido.setText("");
-        apellido.setBounds(200, 55, 100, 20);
+        apellido.setBounds(200, 155, 100, 20);
         JLabel jLabelApellido = new JLabel("Apellido:");
-        jLabelApellido.setBounds(140, 50, 60, 30);
+        jLabelApellido.setBounds(140, 150, 60, 30);
         jLabelApellido.setLabelFor(apellido);
 
         JTextField clave = new JTextField(10);
         clave.setText("");
-        clave.setBounds(200, 85, 100, 20);
+        clave.setBounds(200, 185, 100, 20);
         JLabel jLabelClave = new JLabel("Clave:");
-        jLabelClave.setBounds(140, 80, 60, 30);
+        jLabelClave.setBounds(140, 180, 60, 30);
         jLabelClave.setLabelFor(clave);
 
-        JRadioButton aula1 = new JRadioButton("Aula 1");
-        aula1.setBounds(50, 115, 60, 30);
-        JRadioButton aula2 = new JRadioButton("Aula 2");
-        aula2.setBounds(110, 115, 60, 30);
-        JRadioButton aula3 = new JRadioButton("Aula 3");
-        aula3.setBounds(170, 115, 60, 30);
-        JRadioButton aula4 = new JRadioButton("Aula 4");
-        aula4.setBounds(230, 115, 60, 30);
+        JRadioButton aula1 = new JRadioButton("Icai5");
+        aula1.setBounds(50, 215, 60, 30);
+        JRadioButton aula2 = new JRadioButton("Icai4");
+        aula2.setBounds(110, 215, 60, 30);
+        JRadioButton aula3 = new JRadioButton("Icade");
+        aula3.setBounds(170, 215, 60, 30);
+        JRadioButton aula4 = new JRadioButton("Cantoblanco");
+        aula4.setBounds(230, 215, 100, 30);
 
         ButtonGroup group = new ButtonGroup();
         group.add(aula1);
@@ -55,7 +64,8 @@ public class FormPanel extends JPanel
 
         JButton button = new JButton("Enviar datos");
 
-        button.addActionListener(new ActionListener() {
+        button.addActionListener(new ActionListener()
+        {
             @Override
             public void actionPerformed(ActionEvent e)
             {
@@ -76,7 +86,7 @@ public class FormPanel extends JPanel
                     myWriter.write(aula +" "+ nombre.getText()+" "+apellido.getText()+" "+clave.getText()+"\n");
                     myWriter.close();
 
-                    nombre.setText("");
+                    nombre.setText(""); //las inicializamos a 0 las entradas
                     apellido.setText("");
                     clave.setText("");
                     group.clearSelection();
@@ -90,7 +100,9 @@ public class FormPanel extends JPanel
             }
         });
 
-        button.setBounds(100, 200, 200, 50);
+        button.setBounds(100, 300, 200, 50);
+        add(jTitulo1);
+        add(jTitulo2);
         add(jLabelNombre);
         add(nombre);
         add(jLabelApellido);
@@ -108,13 +120,7 @@ public class FormPanel extends JPanel
     {
         super.paintComponent(g);
         setBackground(Color.getHSBColor(163,39,67));
-
-        //g.setColor(Color.RED);
-
         g.drawImage(logo,20,400,410 ,110,null);
-
-
-
     }
 
 
