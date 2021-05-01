@@ -1,8 +1,10 @@
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Scanner;
 import javax.swing.*;
 
 public class FormPanel extends JPanel
@@ -40,12 +42,14 @@ public class FormPanel extends JPanel
         jLabelApellido.setBounds(140, 150, 60, 30);
         jLabelApellido.setLabelFor(apellido);
 
+
         JTextField clave = new JTextField(10);
         clave.setText("");
         clave.setBounds(200, 185, 100, 20);
         JLabel jLabelClave = new JLabel("Clave:");
         jLabelClave.setBounds(140, 180, 60, 30);
         jLabelClave.setLabelFor(clave);
+
 
         JRadioButton aula1 = new JRadioButton("Icai5");
         aula1.setBounds(50, 215, 60, 30);
@@ -69,6 +73,13 @@ public class FormPanel extends JPanel
             @Override
             public void actionPerformed(ActionEvent e)
             {
+
+                boolean e1 = mensajeErrorEspacios(nombre);
+                boolean e2 = mensajeErrorEspacios(apellido);
+                boolean e3 = mensajeErrorEspacios(apellido);
+                boolean e4 = mensajeErrorNumeros(clave);
+
+
                 int aula = 0; //aula 1 es 0 por defecto
                 if (aula2.isSelected())
                     aula = 1;
@@ -82,9 +93,12 @@ public class FormPanel extends JPanel
                 FileWriter myWriter;
                 try
                 {
-                    myWriter = new FileWriter("./resources/alumnosAulas.txt",true);
-                    myWriter.write(aula +" "+ nombre.getText()+" "+apellido.getText()+" "+clave.getText()+"\n");
-                    myWriter.close();
+                    if (e1==false && e2==false && e3==false && e4==false)
+                    {
+                        myWriter = new FileWriter("./resources/alumnosAulas.txt", true);
+                        myWriter.write(aula + " " + nombre.getText() + " " + apellido.getText() + " " + clave.getText() + "\n");
+                        myWriter.close();
+                    }
 
                     nombre.setText(""); //las inicializamos a 0 las entradas
                     apellido.setText("");
@@ -124,6 +138,36 @@ public class FormPanel extends JPanel
         setBackground(Color.getHSBColor(163,39,67));
         g.drawImage(logo,20,400,410 ,110,null);
     }
+
+    public boolean mensajeErrorEspacios(JTextField text)
+    {
+        String linea;
+        linea=text.getText();
+        if(linea.contains(" "))
+        {
+            JOptionPane.showMessageDialog(null, "Pongalo sin espacios");
+            return true;
+        }
+        else
+            return false;
+
+    }
+
+    public boolean mensajeErrorNumeros(JTextField text)
+    {
+        String linea;
+        linea=text.getText();
+        if(linea.length() != 9 )
+        {
+            JOptionPane.showMessageDialog(null, "Su clave tiene que estar compuesta por 9 números");
+            return true;
+        }
+        else
+            return false;
+
+    }
+
+
 
 
 }

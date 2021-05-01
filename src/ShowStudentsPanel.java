@@ -2,6 +2,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 import java.awt.*;
 
 public class ShowStudentsPanel extends JPanel
@@ -9,15 +11,14 @@ public class ShowStudentsPanel extends JPanel
 
     private MainVentana mainVentana;
     JTable alumnosEnAulas;
-    String[] columnNames = {"Nombre", "Apellidos", "Clave"};
+    String[] columnNames = new String[]{"Nombre", "Apellidos", "Clave"};
     int b1;
+    JLabel titulo;
 
     public ShowStudentsPanel(MainVentana mainVentana)
     {
         this.mainVentana = mainVentana;
         setLayout(null);
-        //this.leerFichero();
-        //this.add(alumnosEnAulas); //lo añade
     }
 
     public void paintComponent(Graphics g)
@@ -26,22 +27,40 @@ public class ShowStudentsPanel extends JPanel
         setBackground(Color.WHITE);
     }
 
-    public void setDatos(int b1) {
+    public void setDatos(int b1)
+    {
 
         this.setB1(b1);
         this.leerFichero();
+
+        titulo.setVisible(false);
         alumnosEnAulas.setVisible(true);
 
     }
+
 
     public void setB1(int b1) //aqui cambiamos la b, para que sea 0,1,2 o 3 (la biblioteca)
     {
         this.b1 = b1;
     }
 
+    public String setAula()
+    {
+        String aula;
+        if (b1==0)
+        { aula="ICAI 5ª Planta"; }
+        else if (b1==1)
+        { aula="ICAI 4ª Planta"; }
+        else if (b1==2)
+        { aula="ICADE"; }
+        else
+            aula="CANTOBLANCO";
+        return aula;
+    }
+
     public void leerFichero() {
         Scanner s = null;
-        String[][] datos2 = new String[100][3];
+        String[][] datos2 = new String[20][3];
         try
         {
             int aulaNum = 0;
@@ -86,10 +105,18 @@ public class ShowStudentsPanel extends JPanel
             s.close();
         }
 
+        JLabel titulo = new JLabel("ALUMNOS EN "+ this.setAula());
+        add(titulo);
+        titulo.setBounds(10,10,500,100);
+        Font fuente =new Font("Arial", Font.BOLD, 20);
+        titulo.setFont(fuente);
 
         alumnosEnAulas = new JTable(datos2, columnNames);
         add(alumnosEnAulas);
-        alumnosEnAulas.setBounds(70, 100, 350, 200);
+        alumnosEnAulas.setBounds(50, 150, 350, 600);
+
+
+
         alumnosEnAulas.setVisible(true);
 
 
