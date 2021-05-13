@@ -14,6 +14,9 @@ public class ShowStudentsPanel extends JPanel
     String[] columnNames = new String[]{"Nombre", "Apellidos", "Clave"};
     int b1;
     JLabel titulo;
+    JLabel nombre;
+    JLabel apellido;
+    JLabel clave;
 
     public ShowStudentsPanel(MainVentana mainVentana)
     {
@@ -32,9 +35,8 @@ public class ShowStudentsPanel extends JPanel
 
         this.setB1(b1);
         this.leerFichero();
-
-        titulo.setVisible(false);
         alumnosEnAulas.setVisible(true);
+        titulo.setVisible(true);
 
     }
 
@@ -105,7 +107,22 @@ public class ShowStudentsPanel extends JPanel
             s.close();
         }
 
-        JLabel titulo = new JLabel("ALUMNOS EN "+ this.setAula());
+
+        if (this.titulo != null)
+        {
+            this.remove(titulo);
+        }
+
+        if (this.nombre != null)
+        {
+            this.remove(nombre);
+            this.remove(apellido);
+            this.remove(clave);
+
+        }
+        
+
+        this.titulo = new JLabel("ALUMNOS EN "+ this.setAula());
         add(titulo);
         titulo.setBounds(10,10,500,100);
         Font fuente =new Font("Arial", Font.BOLD, 20);
@@ -114,6 +131,22 @@ public class ShowStudentsPanel extends JPanel
         alumnosEnAulas = new JTable(datos2, columnNames);
         add(alumnosEnAulas);
         alumnosEnAulas.setBounds(50, 150, 350, 600);
+
+        Font fuente2 =new Font("Arial", Font.BOLD, 20);
+
+        this.nombre= new JLabel("NOMBRE");
+        this.apellido = new JLabel("APELLIDO");
+        this.clave = new JLabel("CLAVE");
+
+        add(nombre);
+        add(apellido);
+        add(clave);
+
+        nombre.setBounds(50,110, 60,30);
+        apellido.setBounds(170, 110, 60,30);
+        clave.setBounds(300,110,60,30);
+
+
 
 
 

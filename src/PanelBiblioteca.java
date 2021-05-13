@@ -15,6 +15,7 @@ public class PanelBiblioteca extends JPanel
     private JButton btn;
     private JLabel lblSitiosLibres;
     private int alumnosReservados; //nos va a dar una lista con las personas en esa clase
+    private MainVentana mainVentana;
 
     public PanelBiblioteca(Biblioteca b1, ShowRoomsPanel showRoomsPanel)
     {
@@ -46,7 +47,7 @@ public class PanelBiblioteca extends JPanel
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                PanelBiblioteca.this.showRoomsPanel.getMainVentana().actualizarAlumnos(b1); //b1=la biblioteca en la que estamos
+                PanelBiblioteca.this.showRoomsPanel.getMainVentana().actualizarAlumnos(b1); //b1=la biblioteca en la que estamo
 
             }
         });

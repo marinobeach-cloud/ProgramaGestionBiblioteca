@@ -4,6 +4,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 import javax.swing.*;
 
@@ -78,6 +79,7 @@ public class FormPanel extends JPanel
                 boolean e2 = mensajeErrorEspacios(apellido);
                 boolean e3 = mensajeErrorEspacios(apellido);
                 boolean e4 = mensajeErrorNumeros(clave);
+                boolean cl = alumnoEnSala(clave);
 
 
                 int aula = 0; //aula 1 es 0 por defecto
@@ -88,17 +90,24 @@ public class FormPanel extends JPanel
                 else if (aula4.isSelected())
                     aula = 3;
 
+                boolean llena = mensajeSalaLLena(aula);
+
                 mainVentana.restarAlumnosLibres(aula);
 
                 FileWriter myWriter;
                 try
                 {
-                    if (e1==false && e2==false && e3==false && e4==false)
+                    if (e1==false && e2==false && e3==false && e4==false )
                     {
-                        myWriter = new FileWriter("./resources/alumnosAulas.txt", true);
-                        myWriter.write(aula + " " + nombre.getText() + " " + apellido.getText() + " " + clave.getText() + "\n");
-                        myWriter.close();
+                        if( llena==false && cl ==false)
+                        {
+                            myWriter = new FileWriter("./resources/alumnosAulas.txt", true);
+                            myWriter.write(aula + " " + nombre.getText() + " " + apellido.getText() + " " + clave.getText() + "\n");
+                            myWriter.close();
+
+                        }
                     }
+
 
                     nombre.setText(""); //las inicializamos a 0 las entradas
                     apellido.setText("");
@@ -109,6 +118,7 @@ public class FormPanel extends JPanel
                 {
                     System.out.println("Error");
                 }
+
 
                 mainVentana.resetShowRoomsPanel();
 
@@ -167,7 +177,80 @@ public class FormPanel extends JPanel
 
     }
 
+    public boolean mensajeSalaLLena(int aula)
+    {
+        Scanner s = null;
+        try
+        {
+            int aulaNum = 0;
+            int a= 0;
+            File fichero = new File("./resources/alumnosAulas.txt");
+            s = new Scanner(fichero); //leemos todo el fichero
+
+            // Leemos linea a linea el fichero
+            while (s.hasNextLine())
+            {
+
+                String linea = s.nextLine();// Guardamos la linea en un String
+                aulaNum = Integer.parseInt(linea.substring(0,1)); //aulaNum va a almacenar el valor del número del aula (1,2,3 o 4)
+                if (aulaNum==aula)
+                {
+                    a=a+1;
+                }
+
+                if (a==20 )
+                {
+                    JOptionPane.showMessageDialog(null, "Esta aula ya está complete intente reservar en otra");
+                    return true;
+                }
+            }
+
+        }
+        catch (Exception ex)
+        {
+            System.out.println("Mensaje: " + ex.getMessage());
+        }
+        finally
+        {
+            s.close();
+        }
+        return false;
+
+    }
+
+    public boolean alumnoEnSala(JTextField c) //va a recibir la clave
+    {
+        Scanner s = null;
+        try
+        {
+            String cl = c.getText();
+            File fichero = new File("./resources/alumnosAulas.txt");
+            s = new Scanner(fichero); //leemos todo el fichero
+            while (s.hasNextLine())
+            {
+
+                String linea = s.nextLine();// Guardamos la linea en un String
+                String clave = linea.substring(linea.length()-9,linea.length()); //almacena la clave
+               if(cl.equals(clave))
+                    {
+                        JOptionPane.showMessageDialog(null, "Este alumno ya está en una sala");
+                        return true;
+
+                    }
+
+                }
 
 
+        }
+        catch (Exception ex)
+        {
+            System.out.println("Mensaje: " + ex.getMessage());
+        }
+        finally
+        {
+            s.close();
+        }
+        return false;
+    }
 
 }

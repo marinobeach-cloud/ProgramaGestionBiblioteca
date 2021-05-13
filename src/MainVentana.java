@@ -68,4 +68,5 @@ public class MainVentana extends JFrame {
         this.repaint();
 
     }
+
 }
